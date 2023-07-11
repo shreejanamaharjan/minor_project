@@ -1,0 +1,235 @@
+@import url('https:/fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+.wrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: -1px 0 10px rgba(0, 0, 0, .2);
+    border-left: 2px solid rgba(255, 255, 255, .1);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    opacity: 0;
+    pointer-events: none;
+    transform: 5s;
+    transform-style: flat;
+}
+.wrapper.active-google-facebook-remove .media-options{
+    display: none;
+}
+.wrapper.active-popup{
+    opacity: 1;
+    pointer-events: auto;
+}
+.icon-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.icon-close i{
+    font-size: 32px;
+    color: black;
+}
+.wrapper .logreg-box{
+    width: 100%;
+   
+
+}
+.wrapper .form-box_login{
+    display: block;
+    
+
+
+}
+.wrapper.active .form-box_login{
+    display: none;
+}
+.wrapper .form-box_register{
+    display: none;
+}
+.wrapper.deactive .form-box_register{
+    display: block;
+}
+.wrapper .form-box_forgetpassword{
+    display: none;
+}
+
+.wrapper.active-forgetpassword .form-box_forgetpassword{
+    display: block;
+}
+.wrapper .form-box_forgetpassword .logreg-title i{
+    font-size: 60px;
+    color: black;
+}
+.logreg-box .logreg-title{
+    text-align: center;
+    margin-bottom: 25px;
+    color: black;
+}
+.logreg-title h2{
+ 
+    font-size: 25px;
+}
+.logreg-titlep{
+    font-size: 14px;
+    font-weight: 500;
+}
+.logreg-box .input-box{
+    position: relative;
+    width: 100%;
+    height: 45px;
+    
+    margin: 15px 0;
+    border-bottom: 2px solid black ;
+
+}
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: black;
+    font-family: 500;
+    padding-right: 25px;
+}
+.input-box label{
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: .5s;
+}
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+
+}
+.input-box .icon{
+    position:absolute;
+    font-size: 19px;
+    color: black;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.logreg-box .remember-forget{
+    font-size: 14.5px;
+    color: black;
+    font-weight: 500;
+    margin: -10px 0 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.remember-forget label input{
+    accent-color: black;
+    margin-right: 3px;
+}
+.remember-forget a{
+    color: black;
+    text-decoration: none;
+}
+.remember-forget a:hover{
+    text-decoration: underline;
+}
+.logreg-box .btn{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    font-size: 16px;
+    color: #222;
+    font-weight: 600;
+
+}
+.logreg-box .logreg-link{
+    font-size: 14.5px;
+    color: black;
+    text-align: center;
+    font-weight: 500;
+    margin: 20px 0 10px;
+
+}
+.logreg-box p a{
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+
+}
+.logreg-boxp a:hover{
+    text-decoration: underline;
+}
+.logreg-link .login-link:hover{
+    text-decoration: underline;
+}
+.logreg-link .register-link:hover{
+    text-decoration: underline;
+}
+.logreg-link .create-link:hover{
+    text-decoration: underline;
+}
+.media-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.media-options a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid black;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    border-radius: 40px;
+    color: black;
+    text-decoration: none;
+    transition: .5s;
+}
+.media-options a:hover{
+    background: rgba(255, 255, 255, .1);
+}
+.media-options a i{
+    font-size: 22px;
+    margin: 0 8px 1.5px 0;
+}
+.media-options a span{
+    font-size: 16px;
+    font-weight: 500;
+}
