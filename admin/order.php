@@ -20,7 +20,7 @@
         }
         ?><br>
         <!-- button to add admin  -->
-        <a href="<?php echo SITE_URL; ?>admin/add-food.php" class="btn-primary">add food</a><br><br>
+        
         
         <table class="tbl">
             <tr>

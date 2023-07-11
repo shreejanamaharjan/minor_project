@@ -3,7 +3,7 @@
 // start session 
 session_start();
 
-define('SITE_URL','http://localhost/food-website/') ;
+define('SITE_URL','http://localhost/minor_project/') ;
 define('LOCALHOST','localhost');
  define('DB_USERNAME','root');
  define('DB_PASSWORD','');
