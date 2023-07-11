@@ -20,6 +20,10 @@
                     <td><textarea name="description"  cols="20" rows="5" ></textarea></td>
                 </tr>
                 <tr>
+                    <td>Ingredients:</td>
+                    <td><textarea name="ingredients"  cols="20" rows="10" ></textarea></td>
+                </tr>
+                <tr>
                     <td>price:</td>
                     <td><input type="number" name="price" ></td>
                 </tr>
@@ -55,6 +59,7 @@
             // get data from form 
             $title= $_POST['title'];
             $description=$_POST['description'];
+            $ingredients=$_POST['ingredients'];
             $price=$_POST['price'];
             
             // check radio button for feature and active 
@@ -97,6 +102,7 @@
             $sql2 = "insert into food set
                title='$title',
                description='$description',
+               ingredients='$ingredients',
                price=$price,
                img_name='$image_name',
                feature = '$featured',                     

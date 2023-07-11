@@ -4,26 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>reset password</title>
     <link rel="stylesheet" href="login.css">
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    
+
+
     <div class="wrapper">
         <div class="logo">
             <p>Nepali<span>Spice</span></p>
         </div>
+
         <div class="logreg-box">
-            <!-- login form -->
-            <div class="form-box_login">
+
+            <!-- forget password form -->
+            <div class="form-box_forgetpassword">
                 <div class="logreg-title">
-                    <h2>Login</h2>
-                    <p>Please login to use the platform</p>
+                    <i class="bx bx-user-circle"></i>
+                    <p>couldn't login to your account?</p>
                 </div>
                 <form action="#">
                     <div class="input-box">
@@ -34,27 +34,25 @@
                     <div class="input-box">
                         <span class="icon"><i class="bx bxs-lock-alt"></i></span>
                         <input type="password" required />
-                        <label>Password</label>
+                        <label> New password</label>
                     </div>
-                    <div class="remember-forget">
-                        <label><input type="checkbox" /> remember me</label>
-                        <a href="forget.html" class="forget-link">Forget password?</a>
+                    <div class="input-box">
+                        <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                        <input type="password" required />
+                        <label>Confirm password</label>
                     </div>
 
-                    <button type="submit" class="btn">Login</button>
+                    <button type="submit" class="btn">submit</button>
 
                     <div class="logreg-link">
                         <p>
-                            Don't have a account?
-                            <a href="register.html" class="register-link">Register</a>
+                            create account. <a href="register.html" class="create-link">Register</a>
                         </p>
                     </div>
                 </form>
             </div>
         </div>
-        
     </div>
-
 </body>
 
 </html>

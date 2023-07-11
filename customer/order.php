@@ -12,6 +12,7 @@ if (isset($_GET['food_id'])) {
             $id = $row['id'];
             $title = $row['title'];
             $price = $row['price'];
+            $ingredients = $row['ingredients'];
         }
     }
 } else {
@@ -22,48 +23,44 @@ if (isset($_GET['food_id'])) {
 <!-- order section  -->
 
 <div class="order" id="order">
-<?php
+    <?php
 
 
 
-if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
 
-    $food = $_POST['food'];
-    $price = $_POST['price'];
-    $qty = $_POST['quantity'];
-    $additional = $_POST['additional'];
-    $total = $price * $qty;
-    $order_date = date("Y-m-d h:i:sa");
-    $status = "ordered"; //oredered,on delivery ,delivered , cancelled
-    $customer_name = $_POST['full_name'];
-    $customer_contact = $_POST['phone'];
-    $customer_email = $_POST['email'];
-    $customer_address = $_POST['address'];
-
-
-   if($qty<=0){
-       $_SESSION['msg']="<div class='small'>***invalid quantity</div>";
-  
-    // header("location:" . SITE_URL . 'submit.php');
-    // header("location:order.php");
-   }else if($customer_name ==''){
-    $_SESSION['cname1']="<div class='small'>***name cannot be empty</div>";
-   }
-   else if( strlen($customer_name)<3){
-    $_SESSION['cname2']="<div class='small'>***invalid name</div>";
-   }
-   else if(strlen($customer_contact)<10){
-    $_SESSION['contact']="<div class='small'>***invalid phone number</div>";
-   }else if($customer_address==''){
-    $_SESSION['address']="<div class='small'>***empty address</div>";
-   }
-   else if ($customer_email == '') {
-    $_SESSION['mail']="<div class='small'>***email cannot be empty</div>";
-}
-   else{
+        $food = $_POST['food'];
+        $price = $_POST['price'];
+        $qty = $_POST['quantity'];
+        $additional = $_POST['additional'];
+        $total = $price * $qty;
+        $order_date = date("Y-m-d h:i:sa");
+        $status = "ordered"; //oredered,on delivery ,delivered , cancelled
+        $customer_name = $_POST['full_name'];
+        $customer_contact = $_POST['phone'];
+        $customer_email = $_POST['email'];
+        $customer_address = $_POST['address'];
 
 
-    $sql1 = "insert into nepali_table set
+        if ($qty <= 0) {
+            $_SESSION['msg'] = "<div class='small'>***invalid quantity</div>";
+
+            // header("location:" . SITE_URL . 'submit.php');
+            // header("location:order.php");
+        } else if ($customer_name == '') {
+            $_SESSION['cname1'] = "<div class='small'>***name cannot be empty</div>";
+        } else if (strlen($customer_name) < 3) {
+            $_SESSION['cname2'] = "<div class='small'>***invalid name</div>";
+        } else if (strlen($customer_contact) < 10) {
+            $_SESSION['contact'] = "<div class='small'>***invalid phone number</div>";
+        } else if ($customer_address == '') {
+            $_SESSION['address'] = "<div class='small'>***empty address</div>";
+        } else if ($customer_email == '') {
+            $_SESSION['mail'] = "<div class='small'>***email cannot be empty</div>";
+        } else {
+
+
+            $sql1 = "insert into nepali_table set
               food = '$food',
               price = $price,
               quantity = $qty,
@@ -77,25 +74,26 @@ if (isset($_POST['submit'])) {
               additional = '$additional'
         ";
 
-    $res1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-    if ($res1 == TRUE) {
+            $res1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+            if ($res1 == TRUE) {
 
-        // $_SESSION['order'] = "<div class='success msg'><img src='tick.png'>
-        // <h2>Thank You!</h2>
-        // <p>Your order has been successfully placed and will be delivered in 45 minutes.</p>
-        // </div>";
+                // $_SESSION['order'] = "<div class='success msg'><img src='tick.png'>
+                // <h2>Thank You!</h2>
+                // <p>Your order has been successfully placed and will be delivered in 45 minutes.</p>
+                // </div>";
 
 
-        header("location:" . SITE_URL . 'customer/submit.php');
-    } else {
-        $_SESSION['order'] = "<div class='error'>failed to order food</div>";
-        header("location:" . SITE_URL . 'customer/page.php#menu');
-    }}
-}
-?>
+                header("location:" . SITE_URL . 'customer/submit.php');
+            } else {
+                $_SESSION['order'] = "<div class='error'>failed to order food</div>";
+                header("location:" . SITE_URL . 'customer/page.php#menu');
+            }
+        }
+    }
+    ?>
     <form action="" method="POST">
         <div class="food-details">
-      
+
             <h5>
                 food-details
             </h5>
@@ -106,79 +104,65 @@ if (isset($_POST['submit'])) {
                 <input type="text" name="food" value="<?php echo $title; ?>" readonly>
                 <p>Food Price:</p><br>
 
+
                 <input type="number" name="price" value="<?php echo $price; ?>" readonly><br><br>
-                <p>Additional:</p><br>
-                <input type="text" name="additional" placeholder="(buff/chicken..) and extra.."><br><br>
-                <p>Quantity:</p><br>
+                <p>Ingredients:</p><br>
+                <div class="order_ingredients">
+                    <?php echo $ingredients ?>
+                </div>
+
+
+                <p style="margin-top: 18px;">Ingredients to add or remove:</p><br>
+                <input type="text" name="additional" class="width" placeholder="(buff/chicken..) and extra.."><br><br>
+                <p style="margin-top: 0px;">Quantity:</p><br>
                 <input type="number" name="quantity" placeholder="quantity for your order" required><br>
-               <?php
-        if(isset($_SESSION['msg'])){
-            echo $_SESSION['msg'];
-            unset($_SESSION['msg']);
-        }
-        ?> 
-              
-            </div>
-        </div>
-        <h3 class="subheading">ORDER NOW</h3>
-        <div class="input-box">
-            <div class="input">
-                <span>Your name</span>
-                <input type="text" name="full_name" placeholder="enter your name" id="username"><br>
                 <?php
-        if(isset($_SESSION['cname1'])){
-            echo $_SESSION['cname1'];
-            unset($_SESSION['cname1']);
-        }
-        if(isset($_SESSION['cname2'])){
-            echo $_SESSION['cname2'];
-            unset($_SESSION['cname2']);
-        }
-        ?> 
-
-            </div>
-
-            <div class="input">
-                <span>Your number</span>
-                <input type="number" name="phone" placeholder="enter your number" id="phone"><br>
-                <?php
-        if(isset($_SESSION['contact'])){
-            echo $_SESSION['contact'];
-            unset($_SESSION['contact']);
-        }
-        ?> 
+                if (isset($_SESSION['msg'])) {
+                    echo $_SESSION['msg'];
+                    unset($_SESSION['msg']);
+                }
+                ?>
 
             </div>
         </div>
-        <div class="input-box">
-            <div class="input">
-                <span>Your address</span>
-                <input type="text" name="address" placeholder="enter your address" id="address"><br>
-                <?php
-        if(isset($_SESSION['address'])){
-            echo $_SESSION['address'];
-            unset($_SESSION['address']);
-        }
-        ?> 
+        <h3 class="subheading">Order now</h3>
+        <div class="order_now">
+            <div class="input-box">
+
+
+                <div class="input">
+                    <p>Your number</p>
+                    <input type="number" name="phone" placeholder="enter your number" id="phone"><br>
+                    <?php
+                    if (isset($_SESSION['contact'])) {
+                        echo $_SESSION['contact'];
+                        unset($_SESSION['contact']);
+                    }
+                    ?>
+
+                </div>
+            </div>
+            <div class="input-box">
+                <div class="input">
+                    <p>Your address</p>
+                    <input type="text" name="address" placeholder="enter your address" id="address"><br>
+                    <?php
+                    if (isset($_SESSION['address'])) {
+                        echo $_SESSION['address'];
+                        unset($_SESSION['address']);
+                    }
+                    ?>
+
+                </div>
 
             </div>
 
-            <div class="input">
-                <span>email</span>
-                <input type="email" name="email" placeholder="enter your email" id="email"><br>
-                <?php
-        if(isset($_SESSION['mail'])){
-            echo $_SESSION['mail'];
-            unset($_SESSION['mail']);
-        }
-        ?> 
 
-            </div>
-            <input type="submit" name="submit" value="Order now" class="btn">
+            <input type="submit" name="submit" value="pay now" class="btn">
         </div>
-        
+
     </form>
-    
+
 
 </div>
 

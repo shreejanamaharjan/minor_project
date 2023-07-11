@@ -8,6 +8,7 @@
 .food-details p{
     font-size: large;
     font-weight: bold;
+    margin-top: 2%;
 }
 .food-details span{
     font-size: medium;
@@ -32,13 +33,27 @@
 .details input{
     background: #eee;
     text-align: center;
-    
+    margin-top: -3%;
     width: 90%;
     font-size: medium;
     color: grey;
     padding: 1%;
     border-radius: 5px;
 
+}
+.order_ingredients{
+    background: #eee;
+    text-align: center;
+    margin-top: -5px;
+    margin-left: 5%;
+    width: 90%;
+    font-size: medium;
+    color: grey;
+    
+    border-radius: 5px;
+}
+.width{
+    height: 90px;
 }
 form .input-box .input .order-error{
     font-size: small;

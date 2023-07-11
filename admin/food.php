@@ -28,7 +28,7 @@
             unset($_SESSION['update']);
         }
         ?>
-        <table class="tbl">
+        <table class="tbl ingredients">
             <tr>
                 <th>S.N.</th>
                 <th>Title</th>
@@ -36,7 +36,9 @@
                 <th>Image</th>
                 <th>Featured</th>
                 <th>Active</th>
+                <th>Ingredients</th>
                 <th>Action</th>
+                
             </tr>
             <?php
             $sql = "select * from food";
@@ -51,6 +53,7 @@
                     $image_name = $row['img_name'];
                     $featured = $row['feature'];
                     $active = $row['active'];
+                    $ingredients=$row['ingredients']
             ?>
                     <tr>
                         <td><?php echo $sn++;?></td>
@@ -71,6 +74,7 @@
                         ?></td>
                         <td><?php echo $featured;?></td>
                         <td><?php echo $active;?></td>
+                        <td><?php echo $ingredients;?></td>
                         <td>
                             <a href="<?php echo SITE_URL;?>admin/update-food.php?id=<?php echo $id; ?>" class="btn-update">Update</a>
                             <a href="<?php echo SITE_URL;?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name;?>" class="btn-delete">Delete</a>
