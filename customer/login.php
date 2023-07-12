@@ -1,3 +1,4 @@
+<?php include('../config/constant.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,10 +23,18 @@
             <!-- login form -->
             <div class="form-box_login">
                 <div class="logreg-title">
+                <?php
+                      if (isset($_SESSION['register'])) {
+                        echo $_SESSION['register'];
+                        unset($_SESSION['register']);
+                    }
+                    
+                   
+                    ?>
                     <h2>Login</h2>
                     <p>Please login to use the platform</p>
                 </div>
-                <form action="#">
+                <form action="#" method="post">
                     <div class="input-box">
                         <span class="icon"><i class="bx bxs-envelope"></i></span>
                         <input type="email" required />
@@ -38,7 +47,7 @@
                     </div>
                     <div class="remember-forget">
                         <label><input type="checkbox" /> remember me</label>
-                        <a href="forget.html" class="forget-link">Forget password?</a>
+                        <a href="forget.php" class="forget-link">Forget password?</a>
                     </div>
 
                     <button type="submit" class="btn">Login</button>
@@ -46,7 +55,7 @@
                     <div class="logreg-link">
                         <p>
                             Don't have a account?
-                            <a href="register.html" class="register-link">Register</a>
+                            <a href="register.php" class="register-link">Register</a>
                         </p>
                     </div>
                 </form>

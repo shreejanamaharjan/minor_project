@@ -554,6 +554,9 @@ header .main i{
     margin-top: 2%;
     text-align: center;
 }
+.order .order_now .input-box .input input{
+  text-align: center;
+}
 .order_now .btn{
   margin-left: 30%;
 }

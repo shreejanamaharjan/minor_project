@@ -4,67 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>reset password</title>
     <link rel="stylesheet" href="login.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    
+
     <div class="wrapper">
         <div class="logo">
             <p>Nepali<span>Spice</span></p>
         </div>
+
         <div class="logreg-box">
-            <div class="form-box_register">
+
+            <!-- forget password form -->
+            <div class="form-box_forgetpassword">
                 <div class="logreg-title">
-                    <h2>Registration</h2>
-                    <p>Please provide the following to verify your identity</p>
+                    <i class="bx bx-user-circle"></i>
+                    <p>couldn't login to your account?</p>
                 </div>
                 <form action="#">
-                    <div class="input-box">
-                        <span class="icon"><i class="bx bxs-user"></i></span>
-                        <input type="text" required />
-                        <label>Full Name</label>
-                    </div>
                     <div class="input-box">
                         <span class="icon"><i class="bx bxs-envelope"></i></span>
                         <input type="email" required />
                         <label>Email</label>
                     </div>
-    
                     <div class="input-box">
                         <span class="icon"><i class="bx bxs-lock-alt"></i></span>
                         <input type="password" required />
-                        <label>Password</label>
+                        <label> New password</label>
                     </div>
-                    <div class="remember-forget">
-                        <label><input type="checkbox" /> agree to the terms &
-                            conditions</label>
+                    <div class="input-box">
+                        <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                        <input type="password" required />
+                        <label>Confirm password</label>
                     </div>
-    
-                    <button type="submit" class="btn">Register</button>
-    
+
+                    <button type="submit" class="btn">submit</button>
+
                     <div class="logreg-link">
                         <p>
-                            already have a account?
-                            <a href="login.html" class="login-link">Login</a>
+                            create account. <a href="register.php" class="create-link">Register</a>
                         </p>
                     </div>
                 </form>
             </div>
         </div>
-       
-        
     </div>
-
-
-   
-
-
-
-
 </body>
 
 </html>
