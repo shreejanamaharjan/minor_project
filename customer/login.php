@@ -24,17 +24,15 @@
             <div class="form-box_login">
                 <div class="logreg-title">
                 <?php
-                      if (isset($_SESSION['register'])) {
-                        echo $_SESSION['register'];
-                        unset($_SESSION['register']);
-                    }
-                    
-                   
-                    ?>
+                        if (isset($_SESSION['customer_register'])) {
+                            echo $_SESSION['customer_register'];
+                            unset($_SESSION['customer_register']);
+                        }
+                ?>
                     <h2>Login</h2>
                     <p>Please login to use the platform</p>
                 </div>
-                <form action="#" method="post">
+                <form action="#" method="POST">
                     <div class="input-box">
                         <span class="icon"><i class="bx bxs-envelope"></i></span>
                         <input type="email" required />
