@@ -59,23 +59,30 @@ if (isset($_POST['register'])) {
                 //Server settings
                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                             //Enable SMTP authentication
-                $mail->Username   = 'shreejana.maharjan61@gmail.com';                     //SMTP username
-                $mail->Password   = 'qhgvratbaafbqslv';                                 //SMTP password
+                $mail->Username   = 'shreejana.191541@ncit.edu.np';                     //SMTP username
+                $mail->Password   = '3123$aarunya!';                                 //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipientsshreejana.maharjan61@gmail.com
-                $mail->setFrom('shreejana.maharjan61@gmail.com');
+                $mail->setFrom('shreejana.191541@ncit.edu.np');
                 $mail->addAddress($email);     //Add a recipient
-               
+
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'no_reply';
-                $mail->Body    = 'Here is the verification link <b><a href= "http://localhost/minor_project/customer/?verification='.$code.'">http://localhost/minor_project/customer/?verification='.$code.'</a></b>';
-               
+                $mail->Body    = 'Here is the verification link <b><a href= "http://localhost/minor_project/customer/?verification=' . $code . '">http://localhost/minor_project/customer/?verification=' . $code . '</a></b>';
+                // Disable SSL certificate verification
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
 
                 $mail->send();
                 echo 'Message has been sent';
