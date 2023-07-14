@@ -1,51 +1,52 @@
-<?php
-// Import PHPMailer classes into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
 
-// Require the necessary PHPMailer files
-require('PHPMailer/Exception.php');
-require('PHPMailer/SMTP.php');
-require('PHPMailer/PHPMailer.php');
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 
-// Create an instance of PHPMailer
-$mail = new PHPMailer(true);
+     <style>
+    #map { height: 350px }
+</style>
 
-try {
-    // Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;    // Enable verbose debug output
-    $mail->isSMTP();                         // Send using SMTP
-    $mail->Host = 'smtp.gmail.com';           // Set the SMTP server to send through
-    $mail->SMTPAuth = true;                   // Enable SMTP authentication
-    $mail->Username = 'shreejana.191541@ncit.edu.np'; // SMTP username (your Gmail address)
-    $mail->Password = 'password';        // SMTP password (your Gmail password)
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-    $mail->Port = 587;                        // TCP port to connect to (use 587 for TLS)
+</head>
+<body>
+<div id="map"></div>
+    <input type="text">
+    <input type="submit" value="enter">
+</body>
+<script>
+    var map = L.map('map');
+    map.setView([27.700769, 85.300140], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 
-    // Recipients
-    $mail->setFrom('shreejana.191541@ncit.edu.np', 'Mailer');
-    $mail->addAddress('shreejana.maharjan61@gmail.com'); // Add a recipient email address
+navigator.geolocation.getCurrentPosition(success, error);
 
-    // Content
-    $mail->isHTML(true);                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+function success(pos){
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+    const accuracy = pos.coords.accuracy;
 
-    // Disable SSL certificate verification
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
-
-    // Send the email
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    // Display an error message if sending the email fails
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    L.marker([lat, lng]).addTo(map);
+    L.circle([lat, lng]), {radius: accuracy}.addTo(map);
 }
-?>
+
+function error(err){
+    if(err.code === 1){
+        alert("please allow geolocation access");
+    }else{
+        alert("cannot access location");
+    }
+}
+</script>
+</html>

@@ -74,7 +74,7 @@ if (isset($_POST['register'])) {
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'no_reply';
-                $mail->Body    = 'Here is the verification link <b><a href= "http://localhost/minor_project/customer/?verification=' . $code . '">http://localhost/minor_project/customer/?verification=' . $code . '</a></b>';
+                $mail->Body    = 'Here is the verification link <b><a href= "http://localhost/minor_project/customer/login.php?verification=' . $code . '">http://localhost/minor_project/customer/login.php?verification=' . $code . '</a></b>';
                 // Disable SSL certificate verification
                 $mail->SMTPOptions = array(
                     'ssl' => array(

@@ -1,4 +1,9 @@
-<?php include('../config/constant.php'); ?>
+<?php include('../config/constant.php'); 
+include('login-check.php');
+if (isset($_GET['username'])) {
+    $customer = $_GET['username'];
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +53,10 @@
         </div>
 
         <div class="main">
-            <a href="#" class="btnLogin-popup">Login</a>
-            <i class='bx bx-user-circle'></i>
+        <i class='bx bx-user-circle'></i>
+        <?php echo $customer;?>
+            <a href="logout.php" class="btnLogin-popup">Logout</a>
+            
             <!-- <div class="bx bx-menu" id="menu-icon"></div> -->
         </div>
     </header>
