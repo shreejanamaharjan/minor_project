@@ -145,14 +145,14 @@ if (isset($_GET['food_id'])) {
             <div class="input-box">
                 <div class="input">
                     <p>Your address</p>
-                    <input type="text" name="address" placeholder="enter your address" id="address"><br>
+                    <input type="text" id="location" name="address" placeholder="enter your address" id="address"><br>
                     <?php
                     if (isset($_SESSION['address'])) {
                         echo $_SESSION['address'];
                         unset($_SESSION['address']);
                     }
                     ?>
-
+                    
                 </div>
 
             </div>
@@ -165,7 +165,13 @@ if (isset($_GET['food_id'])) {
 
 
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        var autocomplete;
+        var id = 'location';
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{type:['geocode'],})
+    });
+</script>
 
 
 
