@@ -1,7 +1,10 @@
 <?php include('partials-front/menu.php');
-
+if (isset($_GET['username'])) {
+    $customer = $_GET['username'];
+}
 ?>
- ?>
+
+
 
 
 
@@ -269,7 +272,7 @@
 
                             </div>
                             <p><?php echo $description; ?></p>
-                            <a href="order.php?food_id=<?php echo $id;?>" class="btn" >order now</a>
+                            <a href="order.php?food_id=<?php echo $id;?>&&username=<?php echo $customer?>" class="btn" >order now</a>
                         </div>
                     </div>
             <?php

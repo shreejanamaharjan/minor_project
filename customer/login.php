@@ -2,6 +2,7 @@
 <?php
 $msg = "";
 
+
 if (isset($_GET['verification'])) {
     if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM customer_login WHERE code='{$_GET['verification']}'")) > 0) {
         $query = mysqli_query($conn, "UPDATE customer_login SET code='' WHERE code='{$_GET['verification']}'");

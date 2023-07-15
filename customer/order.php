@@ -18,6 +18,10 @@ if (isset($_GET['food_id'])) {
 } else {
     // header('location:' . SITE_URL . 'page.php');
 }
+if (isset($_GET['username'])) {
+    $customer = $_GET['username'];
+}
+?>
 ?>
 
 <!-- order section  -->
@@ -36,9 +40,9 @@ if (isset($_GET['food_id'])) {
         $total = $price * $qty;
         $order_date = date("Y-m-d h:i:sa");
         $status = "ordered"; //oredered,on delivery ,delivered , cancelled
-        $customer_name = $_POST['full_name'];
+        // $customer_name = $_POST['full_name'];
         $customer_contact = $_POST['phone'];
-        $customer_email = $_POST['email'];
+        // $customer_email = $_POST['email'];
         $customer_address = $_POST['address'];
 
 
@@ -47,17 +51,22 @@ if (isset($_GET['food_id'])) {
 
             // header("location:" . SITE_URL . 'submit.php');
             // header("location:order.php");
-        } else if ($customer_name == '') {
-            $_SESSION['cname1'] = "<div class='small'>***name cannot be empty</div>";
-        } else if (strlen($customer_name) < 3) {
-            $_SESSION['cname2'] = "<div class='small'>***invalid name</div>";
-        } else if (strlen($customer_contact) < 10) {
+        }
+        //  else if ($customer_name == '') {
+        //     $_SESSION['cname1'] = "<div class='small'>***name cannot be empty</div>";
+        // } 
+        // else if (strlen($customer_name) < 3) {
+        //     $_SESSION['cname2'] = "<div class='small'>***invalid name</div>";
+        // }
+         else if (strlen($customer_contact) < 10) {
             $_SESSION['contact'] = "<div class='small'>***invalid phone number</div>";
         } else if ($customer_address == '') {
             $_SESSION['address'] = "<div class='small'>***empty address</div>";
-        } else if ($customer_email == '') {
-            $_SESSION['mail'] = "<div class='small'>***email cannot be empty</div>";
-        } else {
+        } 
+        // else if ($customer_email == '') {
+        //     $_SESSION['mail'] = "<div class='small'>***email cannot be empty</div>";
+        // }
+         else {
 
 
             $sql1 = "insert into nepali_table set
@@ -67,9 +76,9 @@ if (isset($_GET['food_id'])) {
               total = $total,
               order_date = '$order_date',
               status = '$status',
-              customer_name = '$customer_name',
+              customer_name = '$customer',
               customer_contact = '$customer_contact',
-              customer_email = '$customer_email',
+              
               customer_address = '$customer_address',
               additional = '$additional'
         ";
@@ -83,7 +92,7 @@ if (isset($_GET['food_id'])) {
                 // </div>";
 
 
-                header("location:" . SITE_URL . 'customer/submit.php');
+                header("location:" . SITE_URL . "customer/submit.php?username=$customer");
             } else {
                 $_SESSION['order'] = "<div class='error'>failed to order food</div>";
                 header("location:" . SITE_URL . 'customer/page.php#menu');
@@ -145,7 +154,9 @@ if (isset($_GET['food_id'])) {
             <div class="input-box">
                 <div class="input">
                     <p>Your address</p>
-                    <input type="text" id="location" name="address" placeholder="enter your address" id="address"><br>
+                    <!-- <input type="text" id="location" name="address" placeholder="enter your address" id="address"><br> -->
+                    <input type="text" id="addressInput location address" name="address" placeholder="Address">
+    <button onclick="getUserLocation()">Get My Location</button>
                     <?php
                     if (isset($_SESSION['address'])) {
                         echo $_SESSION['address'];
@@ -166,12 +177,34 @@ if (isset($_GET['food_id'])) {
 
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        var autocomplete;
-        var id = 'location';
-        autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)),{type:['geocode'],})
-    });
-</script>
+   
+    function getUserLocation() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(showUserLocation);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showUserLocation(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+      fetch(url)
+      .then(response => response.json())
+        .then(data => {
+          const address = data.display_name;
+          const addressInput = document.getElementById('addressInput');
+          addressInput.value = address;
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
+    }
+  </script>
+
 
 
 

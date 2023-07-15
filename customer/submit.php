@@ -1,3 +1,21 @@
+<?php
+    include('../config/constant.php');
+  
+
+ if (isset($_GET['username'])) {
+    $customer = $_GET['username'];
+    
+}
+
+     
+     if(isset($_POST['submit'])){
+        header("location:" . SITE_URL . "customer/page.php?username= $customer");
+     }
+    
+    
+    
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,23 +81,15 @@
             <form action="" method="POST">
             <img src="../image/customer_img/tick2.jpg">
             <h2>Thank you!</h2>
+            <?php  echo $customer;?>
             <p>Your details hass been successfully placed and will be delivered within 45 minutes.</p>
             <input type="submit" name="submit" class="button" value="OK">
             </form>
-            
+
         </div>
     
     </div>
-    <?php
-    include('../config/constant.php');
-     
-     if(isset($_POST['submit'])){
-        header("location:" . SITE_URL . 'customer/page.php');
-     }
     
-    
-    
-    ?>
 
 </body>
 </html>
