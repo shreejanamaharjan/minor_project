@@ -3,104 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get User Location and Calculate Distance Example</title>
+  <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  
 </head>
 <body>
-  <div>
-    <input type="text" id="addressInput" placeholder="Address">
-    <button onclick="getUserLocation()">Get My Location</button>
-  </div>
-
-  <div>
-    <h3>Destination</h3>
-    <input type="text" id="destinationInput" placeholder="Destination Address">
-    <button onclick="calculateDistance()">Calculate Distance</button>
-    <p id="distanceResult"></p>
-  </div>
-
+<button id="openMapButton">Open Map</button>
+  <div id="map" style="height: 400px;"></div>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
-    let userLatitude = null;
-    let userLongitude = null;
-
-    function getUserLocation() {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(showUserLocation);
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
+  document.getElementById('openMapButton').addEventListener('click', function () {
+    // Create the map if it's not already initialized
+    if (!window.map) {
+      // Replace 'YOUR_LATITUDE' and 'YOUR_LONGITUDE' with the desired coordinates for the initial center of the map
+      const initialLatLng = [27.712021, 85.312950 ];
+      
+      // Create the map and set its initial view to the specified coordinates
+      window.map = L.map('map').setView(initialLatLng, 13);
+      
+      // Add a tile layer to display the map. You can use other tile layers as well.
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.map);
     }
+  });
+</script>
 
-    function showUserLocation(position) {
-      userLatitude = position.coords.latitude;
-      userLongitude = position.coords.longitude;
-
-      const url = `https://nominatim.openstreetmap.org/reverse?lat=${userLatitude}&lon=${userLongitude}&format=json`;
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          const address = data.display_name;
-          const addressInput = document.getElementById('addressInput');
-          addressInput.value = address;
-        })
-        .catch(error => {
-          console.log('Error:', error);
-        });
-    }
-
-    function calculateDistance() {
-      const destinationInput = document.getElementById('destinationInput');
-      const destinationAddress = destinationInput.value;
-
-      if (userLatitude === null || userLongitude === null) {
-        console.log("User location not available.");
-        return;
-      }
-
-      if (destinationAddress.trim() === "") {
-        console.log("Please enter a destination address.");
-        return;
-      }
-
-      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(destinationAddress)}`;
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          if (data.length > 0) {
-            const destinationLatitude = parseFloat(data[0].lat);
-            const destinationLongitude = parseFloat(data[0].lon);
-
-            const distance = calculateDistanceBetweenPoints(userLatitude, userLongitude, destinationLatitude, destinationLongitude);
-            const distanceResult = document.getElementById('distanceResult');
-            distanceResult.textContent = `Distance: ${distance.toFixed(2)} kilometers`;
-          } else {
-            console.log("No results found for the destination address.");
-          }
-        })
-        .catch(error => {
-          console.log('Error:', error);
-        });
-    }
-
-    function calculateDistanceBetweenPoints(lat1, lon1, lat2, lon2) {
-      const earthRadius = 6371; // Radius of the Earth in kilometers
-      const dLat = degToRad(lat2 - lat1);
-      const dLon = degToRad(lon2 - lon1);
-
-      const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      const distance = earthRadius * c;
-      return distance;
-    }
-
-    function degToRad(degrees) {
-      return degrees * (Math.PI / 180);
-    }
-  </script>
+ 
 </body>
 </html>
