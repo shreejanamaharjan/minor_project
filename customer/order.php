@@ -1,5 +1,27 @@
 <?php include('partials-front/menu.php'); ?>
+<?php
+$args = http_build_query(array(
+  'token' => 'i7cW5Q4Tn26BthKEmcHSwC',
+  'amount'  => 1000
+));
 
+$url = "https://khalti.com/api/v2/payment/verify/";
+
+# Make the call using API.
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+$headers = ['Authorization: Key test_secret_key_4278fc731dd54a138b7eee98688dd9ba'];
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+// Response
+$response = curl_exec($ch);
+$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+?>
 
 <?php
 if (isset($_GET['food_id'])) {
@@ -183,7 +205,7 @@ if (isset($_GET['username'])) {
         var config = {
             // replace the publicKey with yours
             "publicKey": "test_public_key_f9589ee50112449a840b81661a84d325",
-            "productIdentity": "1234567890",
+            "productIdentity": "nepali spice",
             "productName": "Dragon",
             "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
             "paymentPreference": [
