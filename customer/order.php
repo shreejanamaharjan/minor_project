@@ -22,7 +22,7 @@ if (isset($_GET['username'])) {
     $customer = $_GET['username'];
 }
 ?>
-?>
+
 
 <!-- order section  -->
 
@@ -93,7 +93,8 @@ if (isset($_GET['username'])) {
 
 
                 header("location:" . SITE_URL . "customer/submit.php?username=$customer");
-            } else {
+            } 
+            else {
                 $_SESSION['order'] = "<div class='error'>failed to order food</div>";
                 header("location:" . SITE_URL . 'customer/page.php#menu');
             }
@@ -169,13 +170,50 @@ if (isset($_GET['username'])) {
             </div>
 
 
-            <input type="submit" name="submit" value="pay now" class="btn">
+            
+            <button id="payment-button" >Pay with Khalti</button>
+            <input type="submit" name="submit" value="order now" class="btn"  >
         </div>
 
     </form>
 
 
 </div>
+<script>
+        var config = {
+            // replace the publicKey with yours
+            "publicKey": "test_public_key_f9589ee50112449a840b81661a84d325",
+            "productIdentity": "1234567890",
+            "productName": "Dragon",
+            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "paymentPreference": [
+                "KHALTI",
+                "EBANKING",
+                "MOBILE_BANKING",
+                "CONNECT_IPS",
+                "SCT",
+                ],
+            "eventHandler": {
+                onSuccess (payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                },
+                onError (error) {
+                    console.log(error);
+                },
+                onClose () {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            // minimum transaction amount must be 10, i.e 1000 in paisa.
+            checkout.show({amount: 1000});
+        }
+    </script>
 <script type="text/javascript">
    
     function getUserLocation() {
