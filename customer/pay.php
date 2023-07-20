@@ -1,3 +1,26 @@
+<?php
+$args = http_build_query(array(
+  'token' => 'i7cW5Q4Tn26BthKEmcHSwC',
+  'amount'  => 1000
+));
+
+$url = "https://khalti.com/api/v2/payment/verify/";
+
+# Make the call using API.
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+$headers = ['Authorization: Key test_secret_key_4278fc731dd54a138b7eee98688dd9ba'];
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+// Response
+$response = curl_exec($ch);
+$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +30,14 @@
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
 </head>
 <body>
-    <input type="submit" value="pay">
+<button id="payment-button" >Pay with Khalti</button>
     <script>
         var config = {
             // replace the publicKey with yours
-            "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
-            "productIdentity": "1234567890",
-            "productName": "Dragon",
-            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "publicKey": "test_public_key_f9589ee50112449a840b81661a84d325",
+            "productIdentity": "nepali_spice",
+            "productName": "nepali_spice",
+            "productUrl": "http://localhost/minor_project/",
             "paymentPreference": [
                 "KHALTI",
                 "EBANKING",

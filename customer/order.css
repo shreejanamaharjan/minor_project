@@ -65,3 +65,11 @@ form .input-box .input .order-error{
     color: red;
     
 }
+button{
+    background-color: #b1a1e3;
+    color: #fff;
+    display:block; margin: 0 auto;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 50%;
+}

@@ -174,22 +174,86 @@ if (isset($_GET['username'])) {
 
                 </div>
             </div>
-            <div class="input-box">
-                <div class="input">
-                    <p>Your address</p>
-                    <!-- <input type="text" id="location" name="address" placeholder="enter your address" id="address"><br> -->
-                    <input type="text" id="addressInput location address" name="address" placeholder="Address">
-    <button onclick="getUserLocation()">Get My Location</button>
-                    <?php
-                    if (isset($_SESSION['address'])) {
-                        echo $_SESSION['address'];
-                        unset($_SESSION['address']);
-                    }
-                    ?>
-                    
-                </div>
+            <div class="input-box" >
+                <div class="input" >
+                <p>Your address</p>
+            
+        <div class="order_ingredients" id="output" name="address" >
+        
+        </div>
+        <!-- <input type="text" id="output" name="address"> -->
+        <button id="getLocationBtn">Get Location</button>
+        </div>
 
-            </div>
+</div>
+                    <script>
+const options = {
+  enableHighAccuracy: true, // Request high-accuracy reading
+  timeout: 5000, 
+  maximumAge: 2000, 
+};
+
+document.getElementById("getLocationBtn").addEventListener("click", function() {
+  navigator.geolocation.getCurrentPosition(success, error, options);
+});
+
+function success(pos) {
+  const lat = pos.coords.latitude;
+  const lng = pos.coords.longitude;
+  const accuracy = pos.coords.accuracy;
+
+  
+  const destinationLocation = {
+    lat: 27.716145,
+    lng: 85.2813117
+  };
+
+  // Perform reverse geocoding using the Nominatim API
+  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+    .then(response => response.json())
+    .then(data => {
+      const placeName = data.display_name;
+
+      // Calculate the distance between the user's location and the destination using Haversine formula
+      const distance = calculateDistance(lat, lng, destinationLocation.lat, destinationLocation.lng);
+
+      document.getElementById('output').innerText = placeName;
+    })
+    .catch(error => {
+      console.log('Error:', error);
+    });
+}
+
+function error(err) {
+  if (err.code === 1) {
+    alert("Please allow geolocation access");
+  } else {
+    alert("Cannot get current location");
+  }
+}
+
+function calculateDistance(lat1, lng1, lat2, lng2) {
+  const earthRadius = 6371; // Radius of the Earth in kilometers
+  const dLat = toRadians(lat2 - lat1);
+  const dLng = toRadians(lng2 - lng1);
+
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const distance = earthRadius * c;
+
+  return distance;
+}
+
+function toRadians(degrees) {
+  return degrees * Math.PI / 180;
+}
+</script>
+                    
+               
 
 
             
@@ -201,13 +265,14 @@ if (isset($_GET['username'])) {
 
 
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
         var config = {
             // replace the publicKey with yours
             "publicKey": "test_public_key_f9589ee50112449a840b81661a84d325",
-            "productIdentity": "nepali spice",
-            "productName": "Dragon",
-            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "productIdentity": "nepali_spice",
+            "productName": "nepali_spice",
+            "productUrl": "http://localhost/minor_project/",
             "paymentPreference": [
                 "KHALTI",
                 "EBANKING",

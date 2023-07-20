@@ -39,12 +39,12 @@ if (isset($_GET['username'])) {
            
         <nav class="navbar">
            
-            <a href="page.php#home">home</a>
-            <a href="page.php#speciality">dishes</a>
-            <a href="page.php#about">about</a>
-            <a href="page.php#menu">menu</a>
-            <a href="page.php#review">review</a>
-            <a href="page.php#footer">contact</a>
+            <a href="page.php?username=<?php echo $customer;?>">home</a>
+            <a href="page.php?username=<?php echo $customer;?>">dishes</a>
+            <a href="page.php?username=<?php echo $customer;?>">about</a>
+            <a href="page.php?username=<?php echo $customer;?>">menu</a>
+            <a href="page.php?username=<?php echo $customer;?>">review</a>
+            <a href="page.php?username=<?php echo $customer;?>">contact</a>
         </nav>
         <div class="icons">
             <i class="fas fa-bars" id="bars"></i>
