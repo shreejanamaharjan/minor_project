@@ -23,7 +23,8 @@ if (isset($_GET['username'])) {
       rel="stylesheet"
 
     />
-    <link rel="stylesheet" href="style.css">
+ 
+    
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9Qb75h7mqUDJmdy3HFRFNlYxsjdH4fk&libraries=places"></script>

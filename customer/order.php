@@ -178,10 +178,10 @@ if (isset($_GET['username'])) {
                 <div class="input" >
                 <p>Your address</p>
             
-        <div class="order_ingredients" id="output" name="address" >
-        
-        </div>
-        <!-- <input type="text" id="output" name="address"> -->
+                
+      <!-- Hidden input field to store the address value -->
+      <input type="text" name="address" id="addressInput" value="">
+   
         <button id="getLocationBtn">Get Location</button>
         </div>
 
@@ -217,7 +217,10 @@ function success(pos) {
       // Calculate the distance between the user's location and the destination using Haversine formula
       const distance = calculateDistance(lat, lng, destinationLocation.lat, destinationLocation.lng);
 
-      document.getElementById('output').innerText = placeName;
+      const addressInput = document.getElementById('addressInput');
+  addressInput.value = placeName;
+  
+
     })
     .catch(error => {
       console.log('Error:', error);

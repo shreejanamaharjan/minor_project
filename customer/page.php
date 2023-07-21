@@ -291,86 +291,18 @@ if (isset($_GET['username'])) {
 
     <div class="review" id="review">
         <h3 class="subheading">CUSTOMER'S REVIEW</h3>
-        <div class="review-slider">
-            <div class="slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="../image/customer_img/prince.jpg" alt="">
-                    <div class="user-info">
-                        <h3>Prince Kumar Yadav</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div><br>
-                        <p>It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.
-
-                        </p>
-                    </div>
-
-                </div>
+        <div class=" review-slider">
+            <div class=" slide">
+                <h3>Prince Kumar Yadav</h3>
+                <p>It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.
+                </p>
             </div>
-
-            <div class="slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="../image/customer_img/shreeya.jpg" alt="">
-                    <div class="user-info">
-                        <h3>Shreeya Shrestha</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div><br>
-                        <p>This cozy restaurant has left the best
-                            impressions! Hospitable hosts, delicious
-                            dishes, beautiful presentation, wide wine list
-                            and wonderful dessert. I recommend to everyone!
-                            I would like to come back here again and again.
-
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-
-
-
-            <div class="slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="../image/customer_img/shreejana.jpg" alt="">
-                    <div class="user-info">
-                        <h3>Shreejana Maharjan</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div><br>
-                        <p>This place is great! Atmosphere is chill and
-                            cool but the staff is also really friendly. They know
-                            what they’re doing and what they’re talking about, and
-                            you can tell making the customers happy is their main priority.
-                            Food is pretty good, some italian classics and some twists, and for
-                            their prices it’s 100% worth it.
-
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
         </div>
-    </div>
+        <a href="review.php" class="btn">give feedback</a>
+        
+    </div>  
 
+    
 
+        
 <?php include('partials-front/footer.php'); ?>
