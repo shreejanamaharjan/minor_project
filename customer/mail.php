@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-
-     <style>
-    #map { height: 350px }
-</style>
-
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Stripe Payment</title>
+   <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-<div id="map"></div>
-    <input type="text">
-    <input type="submit" value="enter">
+   <h1>Stripe Payment Example</h1>
+   <form id="payment-form">
+      <div>
+         <label for="card-element">
+            Credit or debit card
+         </label>
+         <div id="card-element">
+            <!-- A Stripe Element will be inserted here. -->
+         </div>
+         <!-- Used to display form errors. -->
+         <div id="card-errors" role="alert"></div>
+      </div>
+      <button type="submit">Submit Payment</button>
+   </form>
+
+   <script>
+      var stripe = Stripe('pk_test_51NvIdGAMvf7wNKEmcnFjEibDO7zIlmGjqpQySuw3rlkVZ3EtBGdpOq7e5fONqkJRuebNoqtg1kmVbP5xXwQtHDbc00ESNGsphc');
+      var elements = stripe.elements();
+
+      var card = elements.create('card');
+      card.mount('#card-element');
+
+      var form = document.getElementById('payment-form');
+
+      form.addEventListener('submit', function(event) {
+         event.preventDefault();
+
+         stripe.createToken(card).then(function(result) {
+            if (result.error) {
+               var errorElement = document.getElementById('card-errors');
+               errorElement.textContent = result.error.message;
+            } else {
+               stripeTokenHandler(result.token);
+            }
+         });
+      });
+
+      function stripeTokenHandler(token) {
+         fetch('/charge', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: token.id }),
+         })
+         .then(response => response.json())
+         .then(data => {
+            console.log('Success:', data);
+            alert('Payment successful!');
+         })
+         .catch(error => {
+            console.error('Error:', error);
+            alert('Payment failed. Please try again.');
+         });
+      }
+
+
+
+
+      
+   </script>
 </body>
-<script>
-    var map = L.map('map');
-    map.setView([27.700769, 85.300140], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-
-navigator.geolocation.getCurrentPosition(success, error);
-
-function success(pos){
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    const accuracy = pos.coords.accuracy;
-
-    L.marker([lat, lng]).addTo(map);
-    L.circle([lat, lng]), {radius: accuracy}.addTo(map);
-}
-
-function error(err){
-    if(err.code === 1){
-        alert("please allow geolocation access");
-    }else{
-        alert("cannot access location");
-    }
-}
-</script>
 </html>

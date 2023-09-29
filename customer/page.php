@@ -291,16 +291,40 @@ if (isset($_GET['username'])) {
 
     <div class="review" id="review">
         <h3 class="subheading">CUSTOMER'S REVIEW</h3>
+        <?php
+            //  getting data from database
+            $sql3 = "select * from review order by R_ID desc limit 3";
+            // execute the quer 
+            $res3 = mysqli_query($conn, $sql3);
+            // count rows 
+            $count3 = mysqli_num_rows($res3);
+            $sn=1;
+            // food available or not 
+            if ($count3 > 0) {
+                while ($row = mysqli_fetch_assoc($res3)) {
+                    $id = $row['R_ID'];
+                    $customer = $row['username'];
+                    $feedback = $row['review'];
+                   
+            ?>
         <div class=" review-slider">
             <div class=" slide">
-                <h3>Prince Kumar Yadav</h3>
-                <p>It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.
+                <h3><?php echo $customer;?></h3>
+                <p><?php echo $feedback;?>
                 </p>
             </div>
         </div>
-        <a href="review.php" class="btn">give feedback</a>
+        <?php
+                }
+            } else {
+                echo "<tr><td colspan='13' class='error'>review not available</td></tr>";
+            }
+            ?>
+        <a href="review.php?username=<?php echo $customer?>" class="btn">give feedback</a>
+        
         
     </div>  
+    
 
     
 

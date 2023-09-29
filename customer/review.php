@@ -95,7 +95,26 @@
         </div>
     
     </div>
-    
+    <?php
+        if(isset($_POST['submit'])){
+            // add food in database 
+            // get data from form 
+            $review=$_POST['feedback'];
+            
+            
+         
+           
+        
+            // insert into database 
+            $sql2 = "insert into review set
+               username='$customer',
+               review='$review'";
+
+               $res2 = mysqli_query($conn, $sql2);
+              
+            // redirect with msg 
+        }
+        ?>
 
 </body>
 </html>

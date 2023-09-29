@@ -21,6 +21,10 @@ require 'vendor/autoload.php';
 require('PHPMailer/Exception.php');
 require('PHPMailer/SMTP.php');
 require('PHPMailer/PHPMailer.php');
+// Initialize sessions if not already done
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $msg = "";
 if (isset($_POST['register'])) {
     $name = $_POST['full_name'];
@@ -62,7 +66,7 @@ if (isset($_POST['register'])) {
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                             //Enable SMTP authentication
                 $mail->Username   = 'shreejana.191541@ncit.edu.np';                     //SMTP username
-                $mail->Password   = '';                                 //SMTP password
+                $mail->Password   = 'shreejana@3123';                                 //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
